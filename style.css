@@ -1,0 +1,15 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Poppins", sans-serif;
+}
+
+.contenedorPadre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
