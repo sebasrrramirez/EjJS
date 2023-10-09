@@ -76,7 +76,6 @@ const showPizzas = () => {
   const pizzaEncontrada = pizzas.find((pizza) => pizza.id === idPizza);
   const resultadoPizza = `<div class="card">
 <h2>-${pizzaEncontrada.nombre}</h2>
-<p>ID ${pizzaEncontrada.id}</p>
 <p>Ingredientes: ${pizzaEncontrada.ingredientes}</p>
 <p>Precio $ ${pizzaEncontrada.precio}</p>
 <img src="${pizzaEncontrada.imagen}" alt="" srcset="">
