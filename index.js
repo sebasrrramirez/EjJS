@@ -52,49 +52,49 @@ const button = document.querySelector("#button");
 const container = document.querySelector(".pizza");
 
 //funcion para guardar en LS
-// const saveLocalStorage = () => {
-//   localStorage.setItem("pizza", JSON.stringify(pizzaEncontrada));
-// };
+const saveLocalStorage = () => {
+  localStorage.setItem("pizzaGuardada", JSON.stringify(pizzaEncontrada));
+};
 
-// probar si puedo usar la funcion
-// const createPizza = (pizzaEncontrada) => {
-//   return `<div class="card">
-//   <h2>-${pizzaEncontrada.nombre}</h2>
-//   <p>ID ${pizzaEncontrada.id}</p>
-//   <p>Ingredientes: ${pizzaEncontrada.ingredientes}</p>
-//   <p>Precio $ ${pizzaEncontrada.precio}</p>
-//   <img src="${pizzaEncontrada.imagen}" alt="" srcset="">
-//   </div>`;
-// };
+//funcion Input vacio
+const inputVacio = () => {
+  const idVacio = `<small id="error">Ingrese una pizza</small>`;
+  container.innerHTML = idVacio;
+  return idVacio;
+};
 
-// 4. render aca me esta devolviendo todo el array sin filtrar !!!!!
-// const renderPizzas = () => {
-//   container.innerHTML = pizzaEncontrada
-//     .map((pizza) => createPizza(pizza))
-//     .join("");
-// };
+//funcion Input vacio
+const PizzaNoEncontrada = () => {
+  const idMayor = `<small id="error">Pizza no encontrada en stock</small>`;
+  container.innerHTML = idMayor;
+  return idMayor;
+};
 
-// funcion HORRIBLE para buscar la maldita pizza, que funciona
+//funcion para renderizar y mostrar la pizza
+const showPizzas = () => {
+  idPizza = Number(input.value);
+  const pizzaEncontrada = pizzas.find((pizza) => pizza.id === idPizza);
+  const resultadoPizza = `<div class="card">
+<h2>-${pizzaEncontrada.nombre}</h2>
+<p>ID ${pizzaEncontrada.id}</p>
+<p>Ingredientes: ${pizzaEncontrada.ingredientes}</p>
+<p>Precio $ ${pizzaEncontrada.precio}</p>
+<img src="${pizzaEncontrada.imagen}" alt="" srcset="">
+</div>`;
+  container.innerHTML = resultadoPizza;
+  return resultadoPizza;
+};
+
+// funcion para buscar la pizza, que funciona
 const buscarPizza = () => {
   if (!input.value.length) {
-    const idVacio = `<small id="error">Ingrese una pizza</small>`;
-    container.innerHTML = idVacio;
+    inputVacio();
   }
   const idPizza = Number(input.value);
-  console.log(idPizza); // Convertir a número
   if (idPizza >= 6) {
-    const idMayor = `<small id="error">Pizza no encontrada</small>`;
-    container.innerHTML = idMayor;
+    PizzaNoEncontrada();
   } else {
-    const pizzaEncontrada = pizzas.find((pizza) => pizza.id === idPizza);
-    const resultadoPizza = `<div class="card">
-  <h2>-${pizzaEncontrada.nombre}</h2>
-  <p>ID ${pizzaEncontrada.id}</p>
-  <p>Ingredientes: ${pizzaEncontrada.ingredientes}</p>
-  <p>Precio $ ${pizzaEncontrada.precio}</p>
-  <img src="${pizzaEncontrada.imagen}" alt="" srcset="">
-  </div>`;
-    container.innerHTML = resultadoPizza;
+    showPizzas();
     localStorage.setItem("pizza", JSON.stringify(pizzaEncontrada));
   }
 };
