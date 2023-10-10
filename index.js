@@ -51,10 +51,12 @@ const input = document.querySelector("#Input");
 const button = document.querySelector("#button");
 const container = document.querySelector(".pizza");
 
+//Busco en L
+
 //funcion para guardar en LS
-const saveLocalStorage = () => {
-  localStorage.setItem("pizzaGuardada", JSON.stringify(pizzaEncontrada));
-};
+//const saveLocalStorage = () => {
+//  localStorage.setItem("pizzaGuardada", JSON.stringify(pizzaEncontrada));
+//};
 
 //funcion Input vacio
 const inputVacio = () => {
@@ -70,30 +72,25 @@ const PizzaNoEncontrada = () => {
   return idMayor;
 };
 
-//funcion para renderizar y mostrar la pizza
-const showPizzas = () => {
-  idPizza = Number(input.value);
-  const pizzaEncontrada = pizzas.find((pizza) => pizza.id === idPizza);
-  const resultadoPizza = `<div class="card">
+// funcion para buscar la pizza paso a paso, que funciona
+const buscarPizza = () => {
+  if (!input.value.length) {
+    inputVacio();
+    localStorage.removeItem("pizza");
+  }
+  const idPizza = Number(input.value);
+  if (idPizza >= 6) {
+    PizzaNoEncontrada();
+    localStorage.removeItem("pizza");
+  } else {
+    const pizzaEncontrada = pizzas.find((pizza) => pizza.id === idPizza);
+    const resultadoPizza = `<div class="card">
 <h2>-${pizzaEncontrada.nombre}</h2>
 <p>Ingredientes: ${pizzaEncontrada.ingredientes}</p>
 <p>Precio $ ${pizzaEncontrada.precio}</p>
 <img src="${pizzaEncontrada.imagen}" alt="" srcset="">
 </div>`;
-  container.innerHTML = resultadoPizza;
-  return resultadoPizza;
-};
-
-// funcion para buscar la pizza, que funciona
-const buscarPizza = () => {
-  if (!input.value.length) {
-    inputVacio();
-  }
-  const idPizza = Number(input.value);
-  if (idPizza >= 6) {
-    PizzaNoEncontrada();
-  } else {
-    showPizzas();
+    container.innerHTML = resultadoPizza;
     localStorage.setItem("pizza", JSON.stringify(pizzaEncontrada));
   }
 };
